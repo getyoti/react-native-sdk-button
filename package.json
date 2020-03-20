@@ -8,7 +8,7 @@
     "contributors": [],
     "repository": {
         "type": "git",
-        "url": "git@github.com:lampkicking/react-native-sdk-button.git"
+        "url": "git@github.com:getyoti/react-native-sdk-button.git"
     },
     "devDependencies": {
         "babel-eslint": "5.0.0-beta8",
