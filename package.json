@@ -1,0 +1,37 @@
+{
+    "name": "react-native-yoti-button",
+    "version": "1.0.0",
+    "description": "A <YotiButton /> component for React Native",
+    "main": "YotiButton.js",
+    "license": "MIT",
+    "author": "Yoti Ltd",
+    "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:getyoti/react-native-sdk-button.git"
+    },
+    "devDependencies": {
+        "babel-eslint": "5.0.0-beta8",
+        "eslint": "1.10.3",
+        "eslint-config-airbnb": "4.0.0",
+        "eslint-plugin-react": "3.16.1",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "react-hot-loader": "^4.6.3",
+        "react-native": "^0.57.8"
+    },
+    "dependencies": {
+        "keymirror": "^0.1.1",
+        "prop-types": "^15.5.10"
+    },
+    "scripts": {
+        "test": "node_modules/.bin/eslint *.js"
+    },
+    "files": [
+        "android",
+        "ios",
+        "lib",
+        "YotiButton.js",
+        "react-native-yoti-button.podspec"
+    ]
+}
