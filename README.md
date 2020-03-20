@@ -8,7 +8,7 @@ The purpose of the mobile SDK is to provide 3rd party applications the ability t
 
 ## Prerequisite
 
-Before you begin, kindly make sure you have at the minimum created an application and scenario according to the [documentation](https://www.yoti.com/developers).
+Before you begin, kindly make sure you have at the minimum created an application and scenario on the Yoti Hub according to the [documentation](https://developers.yoti.com/yoti/getting-started-hub).
 
 This SDK does not come with any methods for making backend calls to your server APIs.
 
