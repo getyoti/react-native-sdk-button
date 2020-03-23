@@ -2,6 +2,8 @@
 
 # Yoti Button SDK for React Native
 
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/getyoti/react-native-sdk-button?label=latest%20release)](https://github.com/getyoti/react-native-sdk-button/releases) [![Publish Release](https://github.com/getyoti/react-native-sdk-button/workflows/Publish%20Release/badge.svg)](https://github.com/getyoti/react-native-sdk-button/actions?query=workflow%3A%22Publish+Release%22)
+
 Yoti button component for React Native [Android]([https://github.com/getyoti/android-sdk-button](https://github.com/getyoti/android-sdk-button)) and [iOS]([https://github.com/getyoti/ios-sdk-button](https://github.com/getyoti/ios-sdk-button)).
 
 The purpose of the mobile SDK is to provide 3rd party applications the ability to request attributes from a Yoti user through Yoti mobile App. It is an interaction between a 3rd Party app and the Yoti app facilitated by a very lightweight SDK. This repository contains the module which enables your users to share their identity details with your application in a secure and trusted way.
