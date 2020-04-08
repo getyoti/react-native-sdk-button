@@ -16,7 +16,7 @@ This SDK does not come with any methods for making backend calls to your server 
 
 ## React Native >= 0.60.0 installation
 
-`yarn add react-native-yoti-button`
+`yarn add @getyoti/react-native-yoti-button`
 
 Navigate to your iOS folder and update pods with:
 
@@ -28,11 +28,11 @@ React Native autolinking will handle the rest of the native configuration. Shoul
 
 Install the library with:
 
-`yarn add react-native-yoti-button`
+`yarn add @getyoti/react-native-yoti-button`
 
 Link the library:
 
-`react-native link react-native-yoti-button`
+`react-native link @getyoti/react-native-yoti-button`
 
 If you're using CocoaPods, navigate to your `ios` and update your `Podfile`:
 
@@ -99,7 +99,7 @@ All props are required.
 import React from 'react;
 import { AppRegistry} from 'react-native';
 
-import YotiButton from 'react-native-yoti-button';
+import YotiButton from '@getyoti/react-native-yoti-button';
 
 function AppExample() {
     return (

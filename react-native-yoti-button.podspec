@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
   s.description    = package['description']
   s.license        = package['license']
   s.author         = package['author']
-  s.homepage       = 'https://github.com/lampkicking/react-native-sdk-button'
-  s.source         = { :git => "https://github.com/lampkicking/react-native-sdk-button.git", :tag => "#{s.version}" }
+  s.homepage       = 'https://github.com/getyoti/react-native-sdk-button'
+  s.source         = { :git => "https://github.com/getyoti/react-native-sdk-button.git", :tag => "#{s.version}" }
   s.source_files   = "ios/**/*.{h,m}"
   s.platform       = :ios, "9.0"
   s.dependency "React"
