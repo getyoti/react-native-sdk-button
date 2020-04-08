@@ -8,7 +8,7 @@ import {StyleSheet, Text, View, SafeAreaView, ScrollView} from 'react-native';
 import Header from './components/Header';
 import Input from './components/Input';
 import InputSpacer from './components/InputSpacer';
-import YotiButton from 'react-native-yoti-button';
+import YotiButton from '@getyoti/react-native-yoti-button';
 
 const styles = StyleSheet.create({
   container: {
