@@ -8,7 +8,7 @@ import {StyleSheet, Text, View, SafeAreaView, ScrollView} from 'react-native';
 import Header from './components/Header';
 import Input from './components/Input';
 import InputSpacer from './components/InputSpacer';
-import YotiButton from 'react-native-yoti-button';
+import YotiButton from '@getyoti/react-native-yoti-button';
 
 const styles = StyleSheet.create({
   container: {
@@ -210,6 +210,15 @@ export default () => {
                     setEvent({
                       title: 'onStartScenarioError',
                       details: error.message,
+                      isError: true,
+                      timestamp: new Date(),
+                    });
+                    console.log({onStartScenarioError: error.message});
+                  }}
+                  onYotiAppNotInstalled={error => {
+                    setEvent({
+                      title: 'onYotiAppNotInstalled',
+                      details: 'Yoti app is not installed',
                       isError: true,
                       timestamp: new Date(),
                     });
