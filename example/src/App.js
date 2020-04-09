@@ -215,6 +215,15 @@ export default () => {
                     });
                     console.log({onStartScenarioError: error.message});
                   }}
+                  onYotiAppNotInstalled={error => {
+                    setEvent({
+                      title: 'onYotiAppNotInstalled',
+                      details: 'Yoti app is not installed',
+                      isError: true,
+                      timestamp: new Date(),
+                    });
+                    console.log({onStartScenarioError: error.message});
+                  }}
                 />
               )}
             </View>
