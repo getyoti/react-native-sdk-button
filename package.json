@@ -1,6 +1,6 @@
 {
     "name": "@getyoti/react-native-yoti-button",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A <YotiButton /> component for React Native",
     "main": "YotiButton.js",
     "license": "MIT",
