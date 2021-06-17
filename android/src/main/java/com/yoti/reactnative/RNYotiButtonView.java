@@ -1,9 +1,7 @@
 package com.yoti.reactnative;
 
-import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.widget.LinearLayout;
-import com.yoti.reactnative.R;
 
 import com.yoti.mobile.android.sdk.YotiSDK;
 import com.yoti.mobile.android.sdk.YotiSDKButton;
@@ -22,30 +20,29 @@ import javax.annotation.Nullable;
 public class RNYotiButtonView extends LinearLayout {
     private ThemedReactContext context;
     private YotiSDKButton mButton;
-    private ShareAttributesResultBroadcastReceiver mBroadcastReceiver;
-    private String mYotiCallback;
-    private String mYotiBackendCallback;
     private String mClientSDKID;
     private String mScenarioID;
     private String mUseCaseId;
+    private String mYotiCallback;
+    private String mYotiBackendCallback;
 
     RNYotiButtonView(ThemedReactContext context) {
         super(context);
         this.context = context;
         inflate(context, R.layout.yotibutton, this);
         mButton = findViewById(R.id.RNYotiButton);
-        mBroadcastReceiver = new ShareAttributesResultBroadcastReceiver();
         mYotiCallback = context.getPackageName() + ".YOTI_CALLBACK";
         mYotiBackendCallback = context.getPackageName() + ".BACKEND_CALLBACK";
-        context.getApplicationContext().registerReceiver(mBroadcastReceiver, new IntentFilter(mYotiCallback));
-        context.getApplicationContext().registerReceiver(mBroadcastReceiver, new IntentFilter(mYotiBackendCallback));
 
         YotiSDK.enableSDKLogging(true);
 
         mButton.setOnYotiButtonClickListener(new YotiSDKButton.OnYotiButtonClickListener() {
             @Override
             public void onStartScenario() {
-                sendEvent("onStartScenario", null);
+                WritableMap params = Arguments.createMap();
+                params.putString("useCaseID", mUseCaseId);
+                params.putString("scenarioID", mScenarioID);
+                sendEvent("onStartScenario", params);
             }
 
             @Override
@@ -59,14 +56,20 @@ public class RNYotiButtonView extends LinearLayout {
         mButton.setOnYotiAppNotInstalledListener(new YotiSDKButton.OnYotiAppNotInstalledListener() {
             @Override
             public void onYotiAppNotInstalledError(YotiSDKNoYotiAppException cause) {
-                sendEvent("onYotiAppNotInstalled", null);
+                WritableMap params = Arguments.createMap();
+                params.putString("useCaseID", mUseCaseId);
+                params.putString("scenarioID", mScenarioID);
+                sendEvent("onYotiAppNotInstalled", params);
             }
         });
 
         mButton.setOnYotiCalledListener(new YotiSDKButton.OnYotiCalledListener() {
             @Override
             public void onYotiCalled() {
-                sendEvent("onOpenYotiApp", null);
+                WritableMap params = Arguments.createMap();
+                params.putString("useCaseID", mUseCaseId);
+                params.putString("scenarioID", mScenarioID);
+                sendEvent("onOpenYotiApp", params);
             }
         });
     }
@@ -86,7 +89,6 @@ public class RNYotiButtonView extends LinearLayout {
         addScenarioIfPropsReady();
     }
 
-
     public void setClientSDKID(String clientSDKID) {
         mClientSDKID = clientSDKID;
         addScenarioIfPropsReady();
@@ -100,8 +102,8 @@ public class RNYotiButtonView extends LinearLayout {
     private void addScenarioIfPropsReady() {
         if (
                 TextUtils.isEmpty(mUseCaseId) ||
-                TextUtils.isEmpty(mClientSDKID) ||
-                TextUtils.isEmpty(mScenarioID)
+                        TextUtils.isEmpty(mClientSDKID) ||
+                        TextUtils.isEmpty(mScenarioID)
         ) {
             return;
         }

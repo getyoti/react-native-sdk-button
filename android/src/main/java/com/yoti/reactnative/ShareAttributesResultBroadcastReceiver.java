@@ -10,6 +10,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.yoti.mobile.android.sdk.AbstractShareAttributesBroadcastReceiver;
 
 import javax.annotation.Nullable;
+
 import com.facebook.react.ReactInstanceManager;
 
 public class ShareAttributesResultBroadcastReceiver extends AbstractShareAttributesBroadcastReceiver {
@@ -41,15 +42,17 @@ public class ShareAttributesResultBroadcastReceiver extends AbstractShareAttribu
         mContext.startActivity(intent);
 
         WritableMap params = Arguments.createMap();
-        params.putString("useCaseId", useCaseId);
+        params.putString("useCaseID", useCaseId);
         sendEvent("onShareFailed", params);
     }
 
     @Override
-    public void onCallbackSuccess(String useCaseId, byte[] response) {}
+    public void onCallbackSuccess(String useCaseId, byte[] response) {
+    }
 
     @Override
-    public void onCallbackError(String useCaseId, int httpErrorCode, Throwable error, byte[] response) {}
+    public void onCallbackError(String useCaseId, int httpErrorCode, Throwable error, byte[] response) {
+    }
 
     private void sendEvent(String eventName, @Nullable WritableMap params) {
         final ReactInstanceManager instanceManager = ((ReactApplication) mContext).getReactNativeHost().getReactInstanceManager();
