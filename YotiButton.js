@@ -28,7 +28,7 @@ YotiButton.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   onFail: PropTypes.func.isRequired,
   onOpenYotiApp: PropTypes.func.isRequired,
-  onYotiAppNotInstalled: PropTypes.func
+  onAppNotInstalled: PropTypes.func
 };
 
 export default YotiButton;

@@ -5,9 +5,9 @@ import android.widget.LinearLayout;
 
 import com.yoti.mobile.android.sdk.YotiSDK;
 import com.yoti.mobile.android.sdk.YotiSDKButton;
+import com.yoti.mobile.android.sdk.exceptions.YotiSDKAppNotInstalledException;
 import com.yoti.mobile.android.sdk.model.Scenario;
 import com.yoti.mobile.android.sdk.exceptions.YotiSDKException;
-import com.yoti.mobile.android.sdk.exceptions.YotiSDKNoYotiAppException;
 import com.yoti.mobile.android.sdk.exceptions.YotiSDKNotValidScenarioException;
 
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -53,13 +53,15 @@ public class RNYotiButtonView extends LinearLayout {
             }
         });
 
-        mButton.setOnYotiAppNotInstalledListener(new YotiSDKButton.OnYotiAppNotInstalledListener() {
+        mButton.setOnAppNotInstalledListener(new YotiSDKButton.OnAppNotInstalledListener() {
             @Override
-            public void onYotiAppNotInstalledError(YotiSDKNoYotiAppException cause) {
+            public void onAppNotInstalled(YotiSDKAppNotInstalledException cause, String appURL) {
                 WritableMap params = Arguments.createMap();
+                params.putString("appURL", appURL);
+                params.putString("cause", cause.toString());
                 params.putString("useCaseID", mUseCaseId);
                 params.putString("scenarioID", mScenarioID);
-                sendEvent("onYotiAppNotInstalled", params);
+                sendEvent("onAppNotInstalled", params);
             }
         });
 
