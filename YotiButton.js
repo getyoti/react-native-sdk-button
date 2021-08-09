@@ -19,7 +19,6 @@ function YotiButton({
 }
 
 YotiButton.propTypes = {
-  title: PropTypes.string.isRequired,
   useCaseID: PropTypes.string.isRequired,
   clientSDKID: PropTypes.string.isRequired,
   scenarioID: PropTypes.string.isRequired,

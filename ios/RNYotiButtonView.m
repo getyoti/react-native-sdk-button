@@ -6,7 +6,6 @@
 
 @interface RNYotiButtonView () <YTBSDKDelegate, YTBBackendDelegate>
 
-@property NSString *_title;
 @property NSString *_useCaseID;
 @property NSString *_clientSDKID;
 @property NSString *_scenarioID;
@@ -27,7 +26,6 @@
   self._but = [[YotiButton alloc] init];
   [self._but addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
   self._but.useCaseID = self._useCaseID;
-  [self._but setTitle:self._title forState:UIControlStateNormal];
   [self._but setExclusiveTouch:YES];
   [self addSubview:self._but];
   return self;
@@ -75,11 +73,6 @@
 - (void)backendDidFinishWith:(NSData * _Nullable)data error:(NSError * _Nullable)error {}
 
 // MARK: - Setters
-
--(void)setTitle:(NSString *)title {
-  self._title = title;
-  [self._but setTitle:self._title forState:UIControlStateNormal];
-}
 
 -(void)setUseCaseID:(NSString *)useCaseID {
   self._useCaseID = useCaseID;

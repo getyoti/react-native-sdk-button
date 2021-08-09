@@ -17,11 +17,6 @@ public class RNYotiButtonViewManager extends SimpleViewManager<RNYotiButtonView>
         return new RNYotiButtonView(context);
     }
 
-    @ReactProp(name = "title")
-    public void setTitle(RNYotiButtonView view, String title) {
-        view.setTitle(title);
-    }
-
     @ReactProp(name = "useCaseID")
     public void setUseCaseID(RNYotiButtonView view, String useCaseId) {
         view.setUseCaseId(useCaseId);

@@ -81,10 +81,6 @@ public class RNYotiButtonView extends LinearLayout {
                 .emit(eventName, params);
     }
 
-    public void setTitle(String title) {
-        mButton.setText(title);
-    }
-
     public void setUseCaseId(String useCaseId) {
         mButton.setUseCaseId(useCaseId);
         mUseCaseId = useCaseId;

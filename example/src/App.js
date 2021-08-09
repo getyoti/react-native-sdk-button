@@ -95,18 +95,14 @@ export default () => {
   const [clientSdkIDFocused, setClientSdkIDFocused] = useState(false);
   const [scenarioID, setScenarioID] = useState('406e1d35-6171-459f-b667-3f533bed0a00');
   const [scenarioIDFocused, setScenarioIDFocused] = useState(false);
-  const [buttonTitle, setButtonTitle] = useState('Test');
-  const [buttonTitleFocused, setButtonTitleFocused] = useState(false);
 
   const showYotiButton =
     !useCaseIDFocused &&
     !clientSdkIDFocused &&
     !scenarioIDFocused &&
-    !buttonTitleFocused &&
     useCaseID.length > 0 &&
     clientSdkID.length > 0 &&
-    scenarioID.length > 0 &&
-    buttonTitle.length > 0;
+    scenarioID.length > 0;
 
   useEffect(() => {
     if (!showYotiButton && event != null) {
@@ -139,14 +135,6 @@ export default () => {
               />
               <InputSpacer />
               <Input
-                placeholder="Button Title"
-                value={buttonTitle}
-                onChangeText={setButtonTitle}
-                onBlur={() => setButtonTitleFocused(false)}
-                onFocus={() => setButtonTitleFocused(true)}
-              />
-              <InputSpacer />
-              <Input
                 placeholder="Scenario ID"
                 onBlur={() => setScenarioIDFocused(false)}
                 onFocus={() => setScenarioIDFocused(true)}
@@ -166,7 +154,6 @@ export default () => {
             <View style={styles.yotiButton}>
               {showYotiButton && (
                 <YotiButton
-                  title={buttonTitle}
                   useCaseID={useCaseID}
                   clientSDKID={clientSdkID}
                   scenarioID={scenarioID}
