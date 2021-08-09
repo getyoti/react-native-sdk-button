@@ -33,6 +33,7 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>easyid</string>
 		<string>yoti</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

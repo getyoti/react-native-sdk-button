@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage       = 'https://github.com/getyoti/react-native-sdk-button'
   s.source         = { :git => "https://github.com/getyoti/react-native-sdk-button.git", :tag => "#{s.version}" }
   s.source_files   = "ios/**/*.{h,m}"
-  s.platform       = :ios, "9.0"
+  s.platform       = :ios, "12.0"
   s.dependency "React"
   s.dependency 'yoti-sdk', '4.0.0'
 end
