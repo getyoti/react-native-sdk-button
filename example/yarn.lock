@@ -722,7 +722,7 @@
     minimist "^1.2.0"
 
 "@getyoti/react-native-yoti-button@file:..":
-  version "1.0.2"
+  version "2.0.0"
   dependencies:
     keymirror "^0.1.1"
     prop-types "^15.5.10"
