@@ -65,9 +65,9 @@ public class RNYotiButtonView extends LinearLayout {
             }
         });
 
-        mButton.setOnYotiCalledListener(new YotiSDKButton.OnYotiCalledListener() {
+        mButton.setOnAppCalledListener(new YotiSDKButton.OnAppCalledListener() {
             @Override
-            public void onYotiCalled() {
+            public void onAppCalled() {
                 WritableMap params = Arguments.createMap();
                 params.putString("useCaseID", mUseCaseId);
                 params.putString("scenarioID", mScenarioID);
