@@ -22,6 +22,7 @@ public class RNYotiButtonView extends LinearLayout {
     private YotiSDKButton mButton;
     private String mClientSDKID;
     private String mScenarioID;
+    private String mTheme;
     private String mUseCaseId;
     private String mYotiCallback;
     private String mYotiBackendCallback;
@@ -29,13 +30,12 @@ public class RNYotiButtonView extends LinearLayout {
     RNYotiButtonView(ThemedReactContext context) {
         super(context);
         this.context = context;
-        inflate(context, R.layout.yotibutton, this);
-        mButton = findViewById(R.id.RNYotiButton);
+        YotiSDK.enableSDKLogging(true);
         mYotiCallback = context.getPackageName() + ".YOTI_CALLBACK";
         mYotiBackendCallback = context.getPackageName() + ".BACKEND_CALLBACK";
+    }
 
-        YotiSDK.enableSDKLogging(true);
-
+    private void setListeners() {
         mButton.setOnYotiButtonClickListener(new YotiSDKButton.OnYotiButtonClickListener() {
             @Override
             public void onStartScenario() {
@@ -82,7 +82,6 @@ public class RNYotiButtonView extends LinearLayout {
     }
 
     public void setUseCaseId(String useCaseId) {
-        mButton.setUseCaseId(useCaseId);
         mUseCaseId = useCaseId;
         addScenarioIfPropsReady();
     }
@@ -97,15 +96,35 @@ public class RNYotiButtonView extends LinearLayout {
         addScenarioIfPropsReady();
     }
 
+    public void setTheme(String theme) {
+        if (!TextUtils.isEmpty(mTheme)) {
+            return;
+        }
+        if (theme.equals("THEME_EASYID")) {
+            inflate(context, R.layout.theme_easyid, this);
+        }
+        if (theme.equals("THEME_PARTNERSHIP")) {
+            inflate(context, R.layout.theme_partnership, this);
+        }
+        if (theme.equals("THEME_YOTI")) {
+            inflate(context, R.layout.theme_yoti, this);
+        }
+        mTheme = theme;
+        mButton = findViewById(R.id.RNYotiButton);
+        setListeners();
+        addScenarioIfPropsReady();
+    }
+
     private void addScenarioIfPropsReady() {
         if (
                 TextUtils.isEmpty(mUseCaseId) ||
                         TextUtils.isEmpty(mClientSDKID) ||
-                        TextUtils.isEmpty(mScenarioID)
+                        TextUtils.isEmpty(mScenarioID) ||
+                        TextUtils.isEmpty(mTheme)
         ) {
             return;
         }
-
+        mButton.setUseCaseId(mUseCaseId);
         try {
             Scenario scenario = new Scenario.Builder()
                     .setUseCaseId(mUseCaseId)
