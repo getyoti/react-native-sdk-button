@@ -3,12 +3,14 @@
  *
  */
 
+import CheckBox from '@react-native-community/checkbox';
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ScrollView} from 'react-native';
+import YotiButton, {THEME_EASYID, THEME_PARTNERSHIP, THEME_YOTI} from '@getyoti/react-native-yoti-button';
+
 import Header from './components/Header';
 import Input from './components/Input';
 import InputSpacer from './components/InputSpacer';
-import YotiButton from '@getyoti/react-native-yoti-button';
 
 const styles = StyleSheet.create({
   container: {
@@ -74,7 +76,8 @@ const styles = StyleSheet.create({
   },
   gutter: {paddingHorizontal: 20, paddingVertical: 20},
   yotiButton: {
-    height: 60,
+    height: 100,
+    width: '100%',
     alignSelf: 'center',
   },
   inputsTopGutter: {
@@ -85,21 +88,37 @@ const styles = StyleSheet.create({
     borderTopColor: '#d5dae0',
     borderTopWidth: 2,
   },
+  theme: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+  },
+  themeOption: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  themeOptionText: {
+    color: '#475056',
+    fontFamily: 'Prompt-Medium',
+    fontSize: 12,
+  }
 });
 
 export default () => {
   const [event, setEvent] = useState(null);
   const [useCaseID, setUseCaseID] = useState('test-123');
   const [useCaseIDFocused, setUseCaseIDFocused] = useState(false);
-  const [clientSdkID, setClientSdkID] = useState('5d6a5aa0-bc47-4d62-8136-bb706d794e56');
+  const [clientSdkID, setClientSdkID] = useState('4c5ecbe4-dbc1-4e42-9a36-7fc81dd32bea');
   const [clientSdkIDFocused, setClientSdkIDFocused] = useState(false);
-  const [scenarioID, setScenarioID] = useState('406e1d35-6171-459f-b667-3f533bed0a00');
+  const [scenarioID, setScenarioID] = useState('33903bda-376b-462b-a5ce-302bec59c7de');
   const [scenarioIDFocused, setScenarioIDFocused] = useState(false);
+  const [theme, setTheme] = useState(THEME_PARTNERSHIP);
 
   const showYotiButton =
     !useCaseIDFocused &&
     !clientSdkIDFocused &&
     !scenarioIDFocused &&
+    theme &&
     useCaseID.length > 0 &&
     clientSdkID.length > 0 &&
     scenarioID.length > 0;
@@ -149,6 +168,44 @@ export default () => {
                 value={useCaseID}
                 onChangeText={setUseCaseID}
               />
+              <View style={styles.theme}>
+                <View style={styles.themeOption}>
+                  <CheckBox
+                    value={theme === THEME_PARTNERSHIP}
+                    onValueChange={() => {
+                      setTheme(null)
+                      setTimeout(function () {
+                        setTheme(THEME_PARTNERSHIP)
+                      }, 1000);
+                    }}
+                    />
+                  <Text style={styles.themeOptionText}>Partnership</Text>
+                </View>
+                <View style={styles.themeOption}>
+                  <CheckBox
+                    value={theme === THEME_EASYID}
+                    onValueChange={() => {
+                      setTheme(null)
+                      setTimeout(function () {
+                        setTheme(THEME_EASYID)
+                      }, 1000);
+                    }}
+                  />
+                  <Text style={styles.themeOptionText}>EasyID</Text>
+                </View>
+                <View style={styles.themeOption}>
+                  <CheckBox
+                    value={theme === THEME_YOTI}
+                    onValueChange={() => {
+                      setTheme(null)
+                      setTimeout(function () {
+                        setTheme(THEME_YOTI)
+                      }, 1000);
+                    }}
+                  />
+                  <Text style={styles.themeOptionText}>Yoti</Text>
+                </View>
+              </View>
             </View>
 
             <View style={styles.yotiButton}>
@@ -211,6 +268,7 @@ export default () => {
                     });
                     console.log({onAppNotInstalled: appURL});
                   }}
+                  theme={theme}
                 />
               )}
             </View>
