@@ -178,7 +178,7 @@ For iOS, include a `.strings` file named `YotiButtonSDK.strings` in your applica
 "yoti.sdk.yoti.button.label" = "Label for Yoti theme";
 "yoti.sdk.partnership.button.label" = "Label for Partnership theme";
 "yoti.sdk.easyid.button.label" = "Label for EasyID theme";
-"yoti.sdk.support_info.text" = "Support info text for Partnership theme"
+"yoti.sdk.support_info.text" = "Support info text for Partnership theme";
 ```
 
 # Troubleshooting
