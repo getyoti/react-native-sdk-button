@@ -16,9 +16,12 @@ function YotiButton({
   return (
     <Component
       {...otherProps}
-      onStartScenarioError={event => onStartScenarioError(event.nativeEvent)}
-      onSuccess={event => onSuccess(event.nativeEvent)}
-      onFail={event => onFail(event.nativeEvent)}
+      onStartScenario={event => otherProps?.onStartScenario && otherProps.onStartScenario(event.nativeEvent)}
+      onStartScenarioError={event => onStartScenarioError && onStartScenarioError(event.nativeEvent)}
+      onOpenYotiApp={event => otherProps?.onOpenYotiApp && otherProps.onOpenYotiApp(event.nativeEvent)}
+      onAppNotInstalled={event => otherProps?.onAppNotInstalled && otherProps.onAppNotInstalled(event.nativeEvent)}
+      onSuccess={event => onSuccess && onSuccess(event.nativeEvent)}
+      onFail={event => onFail && onFail(event.nativeEvent)}
     />
   );
 }
