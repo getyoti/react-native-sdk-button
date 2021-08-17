@@ -9,6 +9,7 @@ RCT_EXPORT_MODULE(RNYotiButton)
 RCT_EXPORT_VIEW_PROPERTY(useCaseID, NSString);
 RCT_EXPORT_VIEW_PROPERTY(clientSDKID, NSString);
 RCT_EXPORT_VIEW_PROPERTY(scenarioID, NSString);
+RCT_EXPORT_VIEW_PROPERTY(theme, NSString);
 RCT_EXPORT_VIEW_PROPERTY(onStartScenario, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onStartScenarioError, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onSuccess, RCTBubblingEventBlock);

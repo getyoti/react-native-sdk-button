@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
   s.source_files   = "ios/**/*.{h,m}"
   s.platform       = :ios, "12.0"
   s.dependency "React"
-  s.dependency 'yoti-sdk', '4.0.0'
+  s.dependency 'yoti-sdk', '4.0.1'
 end

@@ -15,7 +15,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock _onSuccess;
 @property (nonatomic, copy) RCTBubblingEventBlock _onFail;
 @property (nonatomic, copy) RCTBubblingEventBlock _onOpenYotiApp;
-@property (weak, nonatomic) IBOutlet YotiButton *_but;
+@property (strong, nonatomic) IBOutlet YotiButton *_but;
 
 @end
 
@@ -92,12 +92,12 @@
 }
 
 -(void)setTheme:(NSString *)theme {
-  if ([theme  isEqual:  @"THEME_EASYID"]) {
+    if ([theme  isEqual:  @"THEME_EASYID"]) {
     self._but.theme = YTBThemeEasyID;
     return;
   }
 
-  if ([theme  isEqual:  @"THEME_YOTI"]) {
+    if ([theme  isEqual:  @"THEME_YOTI"]) {
     self._but.theme = YTBThemeYoti;
     return;
   }

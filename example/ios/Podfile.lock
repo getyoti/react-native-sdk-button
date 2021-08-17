@@ -184,7 +184,7 @@ PODS:
   - React-jsinspector (0.61.5)
   - react-native-yoti-button (2.0.0):
     - React
-    - yoti-sdk (= 4.0.0)
+    - yoti-sdk (= 4.0.1)
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -223,7 +223,7 @@ PODS:
   - RNCCheckbox (0.5.8):
     - React-Core
   - Yoga (1.14.0)
-  - yoti-sdk (4.0.0)
+  - yoti-sdk (4.0.1)
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -334,7 +334,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-yoti-button: ef30f2f385d4186e78c2ac1cb801f0e952eac263
+  react-native-yoti-button: c65c859fea941aaff9c4397faf5ac277c58200a0
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -347,7 +347,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCCheckbox: 6bd119c26c6eb8264a29d59ff66cb70a14de3349
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
-  yoti-sdk: 3c135379227e22cc4f1c76c86de8e17acc6cffd3
+  yoti-sdk: c2545284f763a352bab394ff87ae10e2924def43
 
 PODFILE CHECKSUM: e5b19a6eb6057fb9e5fe7e68be4c6688af50018e
 
