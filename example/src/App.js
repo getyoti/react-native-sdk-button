@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
   },
   gutter: {paddingHorizontal: 20, paddingVertical: 20},
   yotiButton: {
-    height: 80,
+    width: '90%',
+    height: 100,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingHorizontal: 10,

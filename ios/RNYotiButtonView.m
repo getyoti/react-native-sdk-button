@@ -32,7 +32,10 @@
         [weakSelf buttonDidTouchUpInside:button];
     };
     [self addSubview:self._but];
-  return self;
+    [NSLayoutConstraint activateConstraints:@[
+        [self._but.widthAnchor constraintEqualToAnchor:self.widthAnchor],
+    ]];
+    return self;
 }
 
 -(void)buttonDidTouchUpInside:(YotiButton*)sender {
