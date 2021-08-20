@@ -45,12 +45,11 @@
   firstScenarioBuilder.scenarioID = self._scenarioID;
   YTBScenario *firstScenario = [firstScenarioBuilder create:&error];
   [YotiSDK addScenario: firstScenario];
+  self._onStartScenario(nil);
   [YotiSDK startScenarioForUseCaseID:useCaseID withDelegate:self error:&error];
 
   if (error != nil) {
     self._onStartScenarioError(RCTMakeError(error.localizedDescription, nil, nil));
-  } else {
-    self._onStartScenario(nil);
   }
 }
 
