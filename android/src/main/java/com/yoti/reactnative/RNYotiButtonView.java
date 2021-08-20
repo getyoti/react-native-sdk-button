@@ -30,7 +30,6 @@ public class RNYotiButtonView extends LinearLayout {
     RNYotiButtonView(ThemedReactContext context) {
         super(context);
         this.context = context;
-        YotiSDK.enableSDKLogging(true);
         mYotiCallback = context.getPackageName() + ".YOTI_CALLBACK";
         mYotiBackendCallback = context.getPackageName() + ".BACKEND_CALLBACK";
     }
