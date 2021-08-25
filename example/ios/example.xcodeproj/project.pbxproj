@@ -754,7 +754,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yoti.sdk-ios-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yoti.mobile.ios.sdk.react.yoti-button.sample";
 				PRODUCT_NAME = example;
 				PROVISIONING_PROFILE_SPECIFIER = "Yoti Button SDK Sample app Production";
 				SWIFT_OBJC_BRIDGING_HEADER = "example-Bridging-Header.h";
@@ -781,7 +781,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yoti.sdk-ios-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yoti.mobile.ios.sdk.react.yoti-button.sample";
 				PRODUCT_NAME = example;
 				PROVISIONING_PROFILE_SPECIFIER = "Yoti Button SDK Sample app Production";
 				SWIFT_OBJC_BRIDGING_HEADER = "example-Bridging-Header.h";
