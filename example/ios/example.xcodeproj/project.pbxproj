@@ -527,7 +527,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yoti.mobile.ios.sdk.react.yoti-button.sample";
 				PRODUCT_NAME = example;
-				PROVISIONING_PROFILE_SPECIFIER = "Yoti Button SDK Sample app Production";
+				PROVISIONING_PROFILE_SPECIFIER = "Yoti Button SDK React Sample app Production";
 				SWIFT_OBJC_BRIDGING_HEADER = "example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -554,7 +554,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yoti.mobile.ios.sdk.react.yoti-button.sample";
 				PRODUCT_NAME = example;
-				PROVISIONING_PROFILE_SPECIFIER = "Yoti Button SDK Sample app Production";
+				PROVISIONING_PROFILE_SPECIFIER = "Yoti Button SDK React Sample app Production";
 				SWIFT_OBJC_BRIDGING_HEADER = "example-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
