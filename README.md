@@ -64,6 +64,7 @@ Add Yoti as a query scheme to your app's `Info.plist` file:
 +<dict>
 +	<key>LSApplicationQueriesSchemes</key>
 +	<array>
++  		<string>easyid</string>
 +  		<string>yoti</string>
 +	</array>
 ...
@@ -93,21 +94,25 @@ Add `RNYotiButtonViewManager` to the handlers along with `RCTLinkingManager` (if
 
 The SDK exposes a single component which handles communication between your app and the Yoti app on a user's device.
 
-All props are required. 
+All props are required, with the exception of `theme`.
 
 ```javascript
-import React from 'react;
+import React from 'react';
 import { AppRegistry} from 'react-native';
 
-import YotiButton from '@getyoti/react-native-yoti-button';
+import YotiButton, {
+  THEME_EASYID,
+  THEME_PARTNERSHIP,
+  THEME_YOTI,
+} from '@getyoti/react-native-yoti-button';
 
 function AppExample() {
     return (
       <YotiButton
-        title="LOGIN"
-        useCaseID="YOUR_USE_CASE_ID"
         clientSDKID="YOUR_CLIENT_SDK_ID"
         scenarioID="YOUR_SCENARIOD_ID"
+        useCaseID="YOUR_USE_CASE_ID"
+        theme={THEME_YOTI}
         onSuccess={({useCaseId, token}) => {
           // Handle successful Yoti authentication.
           // You can send the token to your backend, for example, and
@@ -136,6 +141,42 @@ function AppExample() {
 }
 
 AppRegistry.registerComponent('App', () => AppExample);
+```
+
+The SDK supports a few themes which have slightly different behaviours:
+
+|Name              |Colour                         |Target App     |
+|------------------|-------------------------------|---------------|
+|THEME_YOTI        |Blue                           |Digital ID Apps|
+|THEME_EASYID      |Red with white logo            |EasyID App     |
+|THEME_PARTNERSHIP |White with supplementary view  |Digital ID Apps|
+
+Depending on which theme you select it may target a specific app or have a supplementary view underneath it.
+The way each themed button is used however remains the same.
+
+To set the theme simply alter `theme` prop on your YotiButton component.
+
+## Localisation
+On Android, you may add values to the `android/app/src/main/res/values/strings.xml` file, creating the `strings.xml` file if it doesn't exist already, according to the keys below:
+
+```xml
+<resources>
+    <string name="app_name">YotiSDK</string>
+    <string name="yoti.sdk.error.yoti_app_version_incompatible">The current Yoti app installed is not compatible, please update your Yoti app.</string>
+    <string name="yoti.sdk.yoti.button.label">CONTINUE WITH YOTI</string>
+    <string name="yoti.sdk.easyid.button.label">Continue with Post Office EasyID</string>
+    <string name="yoti.sdk.partnership.button.label">Continue with your Digital ID</string>
+    <string name="yoti.sdk.support_info.text">Works with:</string>
+</resources>
+```
+
+For iOS, include a `.strings` file named `YotiButtonSDK.strings` in your application bundle and specify the following keys based on the theme:
+
+```
+"yoti.sdk.yoti.button.label" = "Label for Yoti theme";
+"yoti.sdk.partnership.button.label" = "Label for Partnership theme";
+"yoti.sdk.easyid.button.label" = "Label for EasyID theme";
+"yoti.sdk.support_info.text" = "Support info text for Partnership theme";
 ```
 
 # Troubleshooting

@@ -6,16 +6,16 @@
 
 @interface RNYotiButtonView () <YTBSDKDelegate, YTBBackendDelegate>
 
-@property NSString *_title;
 @property NSString *_useCaseID;
 @property NSString *_clientSDKID;
 @property NSString *_scenarioID;
+@property NSString *_theme;
 @property (nonatomic, copy) RCTBubblingEventBlock _onStartScenario;
 @property (nonatomic, copy) RCTBubblingEventBlock _onStartScenarioError;
 @property (nonatomic, copy) RCTBubblingEventBlock _onSuccess;
 @property (nonatomic, copy) RCTBubblingEventBlock _onFail;
 @property (nonatomic, copy) RCTBubblingEventBlock _onOpenYotiApp;
-@property YotiButton *_but;
+@property (strong, nonatomic) IBOutlet YotiButton *_but;
 
 @end
 
@@ -23,17 +23,22 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-  self = [super initWithFrame:frame];
-  self._but = [[YotiButton alloc] init];
-  [self._but addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-  self._but.useCaseID = self._useCaseID;
-  [self._but setTitle:self._title forState:UIControlStateNormal];
-  [self._but setExclusiveTouch:YES];
-  [self addSubview:self._but];
-  return self;
+    self = [super initWithFrame:frame];
+    self._but = [[YotiButton alloc] initWithFrame:frame];
+    self._but.useCaseID = self._useCaseID;
+    [self._but setExclusiveTouch:YES];
+    RNYotiButtonView * __weak weakSelf = self;
+    self._but.action = ^void(YotiButton* button) {
+        [weakSelf buttonDidTouchUpInside:button];
+    };
+    [self addSubview:self._but];
+    [NSLayoutConstraint activateConstraints:@[
+        [self._but.widthAnchor constraintEqualToAnchor:self.widthAnchor],
+    ]];
+    return self;
 }
 
--(void)buttonClicked:(YotiButton*)sender {
+-(void)buttonDidTouchUpInside:(YotiButton*)sender {
   NSString* useCaseID = sender.useCaseID;
   
   NSError* error = nil;
@@ -43,18 +48,17 @@
   firstScenarioBuilder.scenarioID = self._scenarioID;
   YTBScenario *firstScenario = [firstScenarioBuilder create:&error];
   [YotiSDK addScenario: firstScenario];
-  [YotiSDK startScenarioForUseCaseID:useCaseID withDelegate:self error:&error];
+  self._onStartScenario(nil);
+  [YotiSDK startScenarioForUseCaseID:useCaseID theme:sender.theme withDelegate:self error:&error];
 
   if (error != nil) {
     self._onStartScenarioError(RCTMakeError(error.localizedDescription, nil, nil));
-  } else {
-    self._onStartScenario(nil);
   }
 }
 
 // MARK: Yoti callbacks
 
-- (void)yotiSDKDidFailFor:(NSString * _Nonnull)useCaseID with:(NSError * _Nonnull)error {
+- (void)yotiSDKDidFailFor:(NSString *)useCaseID appStoreURL:(NSURL *)appStoreURL with:(NSError *)error {
   self._onFail(RCTMakeError(error.localizedDescription, nil, nil));
 }
 
@@ -76,11 +80,6 @@
 
 // MARK: - Setters
 
--(void)setTitle:(NSString *)title {
-  self._title = title;
-  [self._but setTitle:self._title forState:UIControlStateNormal];
-}
-
 -(void)setUseCaseID:(NSString *)useCaseID {
   self._useCaseID = useCaseID;
   self._but.useCaseID = self._useCaseID;
@@ -92,6 +91,23 @@
 
 -(void)setScenarioID:(NSString *)scenarioID {
   self._scenarioID = scenarioID;
+}
+
+-(void)setTheme:(NSString *)theme {
+  if ([theme  isEqual:  @"THEME_EASYID"]) {
+    self._but.theme = YTBThemeEasyID;
+    return;
+  }
+
+  if ([theme  isEqual:  @"THEME_YOTI"]) {
+    self._but.theme = YTBThemeYoti;
+    return;
+  }
+
+  if ([theme  isEqual:  @"THEME_PARTNERSHIP"]) {
+    self._but.theme = YTBThemePartnership;
+    return;
+  }
 }
 
 -(void)setOnStartScenario:(RCTBubblingEventBlock)onStartScenario {

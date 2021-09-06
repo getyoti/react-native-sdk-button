@@ -5,9 +5,9 @@ import android.widget.LinearLayout;
 
 import com.yoti.mobile.android.sdk.YotiSDK;
 import com.yoti.mobile.android.sdk.YotiSDKButton;
+import com.yoti.mobile.android.sdk.exceptions.YotiSDKAppNotInstalledException;
 import com.yoti.mobile.android.sdk.model.Scenario;
 import com.yoti.mobile.android.sdk.exceptions.YotiSDKException;
-import com.yoti.mobile.android.sdk.exceptions.YotiSDKNoYotiAppException;
 import com.yoti.mobile.android.sdk.exceptions.YotiSDKNotValidScenarioException;
 
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -22,6 +22,7 @@ public class RNYotiButtonView extends LinearLayout {
     private YotiSDKButton mButton;
     private String mClientSDKID;
     private String mScenarioID;
+    private String mTheme;
     private String mUseCaseId;
     private String mYotiCallback;
     private String mYotiBackendCallback;
@@ -29,13 +30,11 @@ public class RNYotiButtonView extends LinearLayout {
     RNYotiButtonView(ThemedReactContext context) {
         super(context);
         this.context = context;
-        inflate(context, R.layout.yotibutton, this);
-        mButton = findViewById(R.id.RNYotiButton);
         mYotiCallback = context.getPackageName() + ".YOTI_CALLBACK";
         mYotiBackendCallback = context.getPackageName() + ".BACKEND_CALLBACK";
+    }
 
-        YotiSDK.enableSDKLogging(true);
-
+    private void setListeners() {
         mButton.setOnYotiButtonClickListener(new YotiSDKButton.OnYotiButtonClickListener() {
             @Override
             public void onStartScenario() {
@@ -53,19 +52,21 @@ public class RNYotiButtonView extends LinearLayout {
             }
         });
 
-        mButton.setOnYotiAppNotInstalledListener(new YotiSDKButton.OnYotiAppNotInstalledListener() {
+        mButton.setOnAppNotInstalledListener(new YotiSDKButton.OnAppNotInstalledListener() {
             @Override
-            public void onYotiAppNotInstalledError(YotiSDKNoYotiAppException cause) {
+            public void onAppNotInstalled(YotiSDKAppNotInstalledException cause, String appURL) {
                 WritableMap params = Arguments.createMap();
+                params.putString("appURL", appURL);
+                params.putString("cause", cause.toString());
                 params.putString("useCaseID", mUseCaseId);
                 params.putString("scenarioID", mScenarioID);
-                sendEvent("onYotiAppNotInstalled", params);
+                sendEvent("onAppNotInstalled", params);
             }
         });
 
-        mButton.setOnYotiCalledListener(new YotiSDKButton.OnYotiCalledListener() {
+        mButton.setOnAppCalledListener(new YotiSDKButton.OnAppCalledListener() {
             @Override
-            public void onYotiCalled() {
+            public void onAppCalled() {
                 WritableMap params = Arguments.createMap();
                 params.putString("useCaseID", mUseCaseId);
                 params.putString("scenarioID", mScenarioID);
@@ -79,12 +80,7 @@ public class RNYotiButtonView extends LinearLayout {
                 .emit(eventName, params);
     }
 
-    public void setTitle(String title) {
-        mButton.setText(title);
-    }
-
     public void setUseCaseId(String useCaseId) {
-        mButton.setUseCaseId(useCaseId);
         mUseCaseId = useCaseId;
         addScenarioIfPropsReady();
     }
@@ -99,15 +95,35 @@ public class RNYotiButtonView extends LinearLayout {
         addScenarioIfPropsReady();
     }
 
+    public void setTheme(String theme) {
+        if (!TextUtils.isEmpty(mTheme)) {
+            return;
+        }
+        if (theme.equals("THEME_EASYID")) {
+            inflate(context, R.layout.theme_easyid, this);
+        }
+        if (theme.equals("THEME_PARTNERSHIP")) {
+            inflate(context, R.layout.theme_partnership, this);
+        }
+        if (theme.equals("THEME_YOTI")) {
+            inflate(context, R.layout.theme_yoti, this);
+        }
+        mTheme = theme;
+        mButton = findViewById(R.id.RNYotiButton);
+        setListeners();
+        addScenarioIfPropsReady();
+    }
+
     private void addScenarioIfPropsReady() {
         if (
                 TextUtils.isEmpty(mUseCaseId) ||
                         TextUtils.isEmpty(mClientSDKID) ||
-                        TextUtils.isEmpty(mScenarioID)
+                        TextUtils.isEmpty(mScenarioID) ||
+                        TextUtils.isEmpty(mTheme)
         ) {
             return;
         }
-
+        mButton.setUseCaseId(mUseCaseId);
         try {
             Scenario scenario = new Scenario.Builder()
                     .setUseCaseId(mUseCaseId)

@@ -3,18 +3,24 @@
  *
  */
 
+import CheckBox from '@react-native-community/checkbox';
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ScrollView} from 'react-native';
+import YotiButton, {THEME_EASYID, THEME_PARTNERSHIP, THEME_YOTI} from '@getyoti/react-native-yoti-button';
+
 import Header from './components/Header';
 import Input from './components/Input';
 import InputSpacer from './components/InputSpacer';
-import YotiButton from '@getyoti/react-native-yoti-button';
 
 const styles = StyleSheet.create({
-  container: {
+  safeAreaView: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
+  },
+  container: {
+    justifyContent: 'space-between',
+    width: '100%'
   },
   welcome: {
     fontFamily: 'Prompt-SemiBold',
@@ -33,7 +39,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 15,
   },
-  results: {flexGrow: 1, paddingHorizontal: 20},
+  results: {
+    flex: 1,
+    justifyContent: 'space-between',
+    marginTop: 30,
+    paddingHorizontal: 20,
+    width: '100%',
+  },
   resultsContainer: {
     flex: 1,
     width: '100%',
@@ -74,8 +86,11 @@ const styles = StyleSheet.create({
   },
   gutter: {paddingHorizontal: 20, paddingVertical: 20},
   yotiButton: {
-    height: 60,
-    alignSelf: 'center',
+    width: '90%',
+    height: 100,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
   },
   inputsTopGutter: {
     marginVertical: 20,
@@ -85,28 +100,42 @@ const styles = StyleSheet.create({
     borderTopColor: '#d5dae0',
     borderTopWidth: 2,
   },
+  theme: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  themeOption: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  themeOptionText: {
+    color: '#475056',
+    fontFamily: 'Prompt-Medium',
+    fontSize: 12,
+    marginLeft: 10,
+  }
 });
 
 export default () => {
   const [event, setEvent] = useState(null);
-  const [useCaseID, setUseCaseID] = useState('test-123');
+  const [useCaseID, setUseCaseID] = useState('');
   const [useCaseIDFocused, setUseCaseIDFocused] = useState(false);
-  const [clientSdkID, setClientSdkID] = useState('5d6a5aa0-bc47-4d62-8136-bb706d794e56');
+  const [clientSdkID, setClientSdkID] = useState('');
   const [clientSdkIDFocused, setClientSdkIDFocused] = useState(false);
-  const [scenarioID, setScenarioID] = useState('406e1d35-6171-459f-b667-3f533bed0a00');
+  const [scenarioID, setScenarioID] = useState('');
   const [scenarioIDFocused, setScenarioIDFocused] = useState(false);
-  const [buttonTitle, setButtonTitle] = useState('Test');
-  const [buttonTitleFocused, setButtonTitleFocused] = useState(false);
+  const [theme, setTheme] = useState(THEME_PARTNERSHIP);
 
   const showYotiButton =
     !useCaseIDFocused &&
     !clientSdkIDFocused &&
     !scenarioIDFocused &&
-    !buttonTitleFocused &&
+    theme &&
     useCaseID.length > 0 &&
     clientSdkID.length > 0 &&
-    scenarioID.length > 0 &&
-    buttonTitle.length > 0;
+    scenarioID.length > 0;
 
   useEffect(() => {
     if (!showYotiButton && event != null) {
@@ -116,17 +145,14 @@ export default () => {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.safeAreaView}>
         <Header />
-        <View style={{flex: 1, justifyContent: 'space-between', width: '100%'}}>
+        <View style={styles.container}>
           <View style={styles.gutter}>
             <Text style={styles.intro}>
               Please fill in the required information below, and tap the Yoti
               button once you are done.
             </Text>
-          </View>
-          <View style={styles.results}>
-            <Results event={event} />
           </View>
           <View>
             <View style={styles.inputsTopGutter}>
@@ -136,14 +162,6 @@ export default () => {
                 onFocus={() => setClientSdkIDFocused(true)}
                 value={clientSdkID}
                 onChangeText={setClientSdkID}
-              />
-              <InputSpacer />
-              <Input
-                placeholder="Button Title"
-                value={buttonTitle}
-                onChangeText={setButtonTitle}
-                onBlur={() => setButtonTitleFocused(false)}
-                onFocus={() => setButtonTitleFocused(true)}
               />
               <InputSpacer />
               <Input
@@ -161,73 +179,113 @@ export default () => {
                 value={useCaseID}
                 onChangeText={setUseCaseID}
               />
-            </View>
-
-            <View style={styles.yotiButton}>
-              {showYotiButton && (
-                <YotiButton
-                  title={buttonTitle}
-                  useCaseID={useCaseID}
-                  clientSDKID={clientSdkID}
-                  scenarioID={scenarioID}
-                  onSuccess={({useCaseID, token}) => {
-                    setEvent({
-                      title: 'onSuccess',
-                      details: `${useCaseID} - ${token}`,
-                      isError: false,
-                      timestamp: new Date(),
-                    });
-                    console.log({onSuccess: {useCaseID, token}});
-                  }}
-                  onFail={error => {
-                    setEvent({
-                      title: 'onFail',
-                      details: error.message,
-                      isError: true,
-                      timestamp: new Date(),
-                    });
-                    console.log({onFail: error.message});
-                  }}
-                  onOpenYotiApp={() => {
-                    setEvent({
-                      title: 'onOpenYotiApp',
-                      details: '',
-                      isError: false,
-                      timestamp: new Date(),
-                    });
-                    console.log('onOpenYotiApp');
-                  }}
-                  onStartScenario={() => {
-                    setEvent({
-                      title: 'onStartScenario',
-                      details: '',
-                      isError: false,
-                      timestamp: new Date(),
-                    });
-                    console.log('onStartScenario');
-                  }}
-                  onStartScenarioError={error => {
-                    setEvent({
-                      title: 'onStartScenarioError',
-                      details: error.message,
-                      isError: true,
-                      timestamp: new Date(),
-                    });
-                    console.log({onStartScenarioError: error.message});
-                  }}
-                  onYotiAppNotInstalled={error => {
-                    setEvent({
-                      title: 'onYotiAppNotInstalled',
-                      details: 'Yoti app is not installed',
-                      isError: true,
-                      timestamp: new Date(),
-                    });
-                    console.log({onStartScenarioError: error.message});
-                  }}
-                />
-              )}
+              <View style={styles.theme}>
+                <View style={styles.themeOption}>
+                  <CheckBox
+                    value={theme === THEME_PARTNERSHIP}
+                    onValueChange={() => {
+                      setTheme(null)
+                      setTimeout(function () {
+                        setTheme(THEME_PARTNERSHIP)
+                      }, 1000);
+                    }}
+                    />
+                  <Text style={styles.themeOptionText}>Partnership</Text>
+                </View>
+                <View style={styles.themeOption}>
+                  <CheckBox
+                    value={theme === THEME_EASYID}
+                    onValueChange={() => {
+                      setTheme(null)
+                      setTimeout(function () {
+                        setTheme(THEME_EASYID)
+                      }, 1000);
+                    }}
+                  />
+                  <Text style={styles.themeOptionText}>EasyID</Text>
+                </View>
+                <View style={styles.themeOption}>
+                  <CheckBox
+                    value={theme === THEME_YOTI}
+                    onValueChange={() => {
+                      setTheme(null)
+                      setTimeout(function () {
+                        setTheme(THEME_YOTI)
+                      }, 1000);
+                    }}
+                  />
+                  <Text style={styles.themeOptionText}>Yoti</Text>
+                </View>
+              </View>
             </View>
           </View>
+        </View>
+        <View style={styles.yotiButton}>
+          {showYotiButton && (
+            <YotiButton
+              useCaseID={useCaseID}
+              clientSDKID={clientSdkID}
+              scenarioID={scenarioID}
+              onSuccess={({useCaseID, token}) => {
+                setEvent({
+                  title: 'onSuccess',
+                  details: `${useCaseID} - ${token}`,
+                  isError: false,
+                  timestamp: new Date(),
+                });
+                console.log({onSuccess: {useCaseID, token}});
+              }}
+              onFail={error => {
+                setEvent({
+                  title: 'onFail',
+                  details: error.message,
+                  isError: true,
+                  timestamp: new Date(),
+                });
+                console.log({onFail: error.message});
+              }}
+              onOpenYotiApp={() => {
+                setEvent({
+                  title: 'onOpenYotiApp',
+                  details: '',
+                  isError: false,
+                  timestamp: new Date(),
+                });
+                console.log('onOpenYotiApp');
+              }}
+              onStartScenario={() => {
+                setEvent({
+                  title: 'onStartScenario',
+                  details: '',
+                  isError: false,
+                  timestamp: new Date(),
+                });
+                console.log('onStartScenario');
+              }}
+              onStartScenarioError={error => {
+                setEvent({
+                  title: 'onStartScenarioError',
+                  details: error.message,
+                  isError: true,
+                  timestamp: new Date(),
+                });
+                console.log({onStartScenarioError: error.message});
+              }}
+              onAppNotInstalled={({appURL, cause}) => {
+                setEvent({
+                  title: 'onAppNotInstalled',
+                  details: cause,
+                  isError: true,
+                  timestamp: new Date(),
+                });
+                console.log({onAppNotInstalled: appURL});
+              }}
+              theme={theme}
+            />
+          )}
+        </View>
+        <View style={styles.results}>
+          <Results event={event} />
         </View>
       </SafeAreaView>
     </>

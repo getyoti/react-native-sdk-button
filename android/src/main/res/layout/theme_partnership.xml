@@ -6,5 +6,6 @@
         android:layout_height="match_parent"
         android:text=""
         android:gravity="center"
-        yoti:useCaseId="login"/>
+        yoti:useCaseId="login"
+        yoti:buttonTheme="Theme_Partnership"/>
 </merge>

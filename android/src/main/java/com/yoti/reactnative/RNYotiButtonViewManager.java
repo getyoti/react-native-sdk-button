@@ -1,5 +1,7 @@
 package com.yoti.reactnative;
 
+import android.util.Log;
+
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
@@ -17,11 +19,6 @@ public class RNYotiButtonViewManager extends SimpleViewManager<RNYotiButtonView>
         return new RNYotiButtonView(context);
     }
 
-    @ReactProp(name = "title")
-    public void setTitle(RNYotiButtonView view, String title) {
-        view.setTitle(title);
-    }
-
     @ReactProp(name = "useCaseID")
     public void setUseCaseID(RNYotiButtonView view, String useCaseId) {
         view.setUseCaseId(useCaseId);
@@ -35,5 +32,10 @@ public class RNYotiButtonViewManager extends SimpleViewManager<RNYotiButtonView>
     @ReactProp(name = "scenarioID")
     public void setScenarioID(RNYotiButtonView view, String scenarioID) {
         view.setScenarioID(scenarioID);
+    }
+
+    @ReactProp(name = "theme")
+    public void setTheme(RNYotiButtonView view, String theme) {
+        view.setTheme(theme);
     }
 }
