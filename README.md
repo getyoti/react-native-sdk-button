@@ -156,8 +156,6 @@ The way each themed button is used however remains the same.
 
 To set the theme simply alter `theme` prop on your YotiButton component.
 
-By default, the `THEME_PARTNERSHIP` theme will be selected.
-
 ## Localisation
 On Android, you may add values to the `android/app/src/main/res/values/strings.xml` file, creating the `strings.xml` file if it doesn't exist already, according to the keys below:
 

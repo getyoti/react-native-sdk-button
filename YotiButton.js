@@ -30,7 +30,7 @@ YotiButton.propTypes = {
   useCaseID: PropTypes.string.isRequired,
   clientSDKID: PropTypes.string.isRequired,
   scenarioID: PropTypes.string.isRequired,
-  theme: PropTypes.string,
+  theme: PropTypes.string.isRequired,
   onStartScenario: PropTypes.func.isRequired,
   onStartScenarioError: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
@@ -38,10 +38,6 @@ YotiButton.propTypes = {
   onOpenYotiApp: PropTypes.func.isRequired,
   onAppNotInstalled: PropTypes.func
 };
-
-YotiButton.defaultProps = {
-  theme: THEME_PARTNERSHIP
-}
 
 export {
   THEME_EASYID,

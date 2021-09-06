@@ -94,17 +94,20 @@
 }
 
 -(void)setTheme:(NSString *)theme {
-    if ([theme  isEqual:  @"THEME_EASYID"]) {
+  if ([theme  isEqual:  @"THEME_EASYID"]) {
     self._but.theme = YTBThemeEasyID;
     return;
   }
 
-    if ([theme  isEqual:  @"THEME_YOTI"]) {
+  if ([theme  isEqual:  @"THEME_YOTI"]) {
     self._but.theme = YTBThemeYoti;
     return;
   }
 
-  self._but.theme = YTBThemePartnership;
+  if ([theme  isEqual:  @"THEME_PARTNERSHIP"]) {
+    self._but.theme = YTBThemePartnership;
+    return;
+  }
 }
 
 -(void)setOnStartScenario:(RCTBubblingEventBlock)onStartScenario {
