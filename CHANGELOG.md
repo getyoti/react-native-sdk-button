@@ -1,5 +1,9 @@
 # ChangeLog
 
+## Version 2.1.0
+
+Android 12 support
+
 ## Version 2.0.0
 
 The `title` prop has been replaced by the localisation options.
