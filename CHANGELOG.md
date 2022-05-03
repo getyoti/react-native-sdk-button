@@ -1,6 +1,9 @@
 # ChangeLog
+## Version 2.1.1
 
-## Version 2.1.0
+Android 12 support
+
+## Version 2.1.0 - This version contains an issue on callbacks. Please jump to 2.1.1
 
 Android 12 support
 
